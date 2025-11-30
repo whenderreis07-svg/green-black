@@ -1,7 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 
 app = FastAPI()
 
 @app.get("/")
-def read_root():
-    return {"status": "online", "msg": "API verde-preto rodando no Render"}
+def root():
+    return {"status": "ok"}
+
+@app.head("/")
+def root_head():
+    return Response(status_code=200)
+
+@app.get("/healthz")
+def healthz():
+    return {"ok": True}
