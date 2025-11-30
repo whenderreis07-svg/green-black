@@ -1,6 +1,14 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
+from pydantic import BaseModel
+from fastapi import Response
 
 app = FastAPI()
+
+class Signal(BaseModel):
+    mesa: str
+    result: str
+    conf: float
+    horario: str
 
 @app.get("/")
 def root():
@@ -13,3 +21,8 @@ def root_head():
 @app.get("/healthz")
 def healthz():
     return {"ok": True}
+
+@app.post("/sinal")
+def receber_sinal(data: Signal):
+    print("Sinal recebido:", data.dict())
+    return {"ok": True, "recebido": data.dict()}
