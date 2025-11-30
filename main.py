@@ -26,3 +26,4 @@ def healthz():
 def receber_sinal(data: Signal):
     print("Sinal recebido:", data.dict())
     return {"ok": True, "recebido": data.dict()}
+
